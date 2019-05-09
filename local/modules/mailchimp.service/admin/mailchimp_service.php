@@ -20,7 +20,8 @@ $APPLICATION->SetTitle(Loc::getMessage("MAILCHIMP_SERVICE_TITLE"));
 ?>
 
 <?
-\Mailchimp\Service\Test::get();
+
+echo(\Bitrix\Main\Config\Option::get('mailchimp.service','api_key'));
 ?>
 
 
