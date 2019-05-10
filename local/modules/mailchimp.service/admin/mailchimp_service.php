@@ -3,6 +3,8 @@
 use Bitrix\Main\ModuleManager;
 use Bitrix\Main\Localization\Loc;
 use Mailchimp\Service;
+use Bitrix\Main\Config\Option;
+use Mailchimp\Service\ApiMailchimp;
 
 require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_admin_before.php");
 
@@ -40,7 +42,7 @@ $APPLICATION->SetTitle(Loc::getMessage("MAILCHIMP_SERVICE_TITLE"));
 ?>
 
 <?
-$api_key = \Bitrix\Main\Config\Option::get('mailchimp.service', 'api_key');
+/*$api_key = \Bitrix\Main\Config\Option::get('mailchimp.service', 'api_key');
 $mailchimp = new Service\ApiMailchimp($api_key, 'us20');
 
 $list_id = 'c8cc1cfd27';
@@ -55,7 +57,7 @@ $camp_id = $res->id;
 $res = $mailchimp->createCampingContent($plain, $html, $camp_id);
 
 # Отправка рассылки
-$res = $mailchimp->sendCamping($camp_id);
+$res = $mailchimp->sendCamping($camp_id);*/
 
 /*$company_account = $mailchimp->getCampaigns();
 foreach ($company_account->campaigns as $campaign)
@@ -66,6 +68,18 @@ foreach ($company_account->campaigns as $campaign)
 }*/?>
 <pre>
 <?
-var_dump($camp_id);
+# получим необходимые данные для работы list_id, api_key, us-преффикс
+$list_id = Option::get('mailchimp.service', 'list_id');
+$us_site = Option::get('mailchimp.service', 'us');
+$api_key = Option::get('mailchimp.service', 'api_key');
+
+# если данные не пустые добавим пользователя к рассылки
+if(!empty($list_id ) and !empty($us_site) and !empty($api_key))
+{
+    $mailchimp = new ApiMailchimp($api_key, $us_site);
+    $res = $mailchimp->addSubscriber($list_id, 'mikimoto666@yandex.ru', 'Петя', 'Петров');
+    var_dump($res);
+}
+
 ?>
 </pre>

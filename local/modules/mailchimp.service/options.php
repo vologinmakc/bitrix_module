@@ -26,7 +26,22 @@ $aTabs = array(
                 Loc::getMessage("MAILCHIMP_SERVICE_OPTIONS_TAB_API_KEY"),
                 "",
                 array("text",20)
+            ),
+            Loc::getMessage("MAILCHIMP_SERVICE_OPTIONS_TAB_US"),
+            array(
+                "us",
+                Loc::getMessage("MAILCHIMP_SERVICE_OPTIONS_TAB_US_SITE"),
+                "",
+                array("text",20)
+            ),
+            Loc::getMessage("MAILCHIMP_SERVICE_OPTIONS_TAB_LIST_ID"),
+            array(
+                "list_id",
+                Loc::getMessage("MAILCHIMP_SERVICE_OPTIONS_TAB_LIST_ID_MAILCHIMP"),
+                "",
+                array("text",20)
             )
+
         )
     )
 );
