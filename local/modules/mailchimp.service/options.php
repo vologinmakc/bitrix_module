@@ -74,25 +74,8 @@ $tabControl->End();
 ?>
 
 <?php
-/*foreach ($aTabs as $aTab)
-{
-    foreach ($aTab['OPTIONS'] as $arOption)
-    {
-        if (!is_array($arOption)) //Строка с подсветкой. Используется для разделения настроек в одной вкладке
-            continue;
 
-        $optionName = $arOption[0];
-
-        $optionValue = $request->getPost($optionName);
-
-        echo "<pre>";
-        var_dump($request[$optionName]);
-        echo "</pre>";
-    }
-}*/
-
-# Сохранение настроек модуля в файле setting.php
-
+# Сохранение настроек в базе данных b_options
 if ($request->isPost() && check_bitrix_sessid())
 {
 
@@ -113,10 +96,6 @@ if ($request->isPost() && check_bitrix_sessid())
             Option::set($module_id, $optionName, is_array($optionValue) ? implode(",", $optionValue):$optionValue);
         }
     }
-}# Сохранение настроек модуля в файле setting.php
+}# Сохранение настроек в базе данных b_options
 
-$options = Option::get($module_id, 'api_key');
-echo "<pre>";
-var_dump($options);
-echo "</pre>";
 ?>
